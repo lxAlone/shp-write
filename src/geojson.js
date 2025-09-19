@@ -11,32 +11,32 @@ module.exports.multipolygon = justType("MultiPolygon", "POLYGON");
  * @returns {(gj: { features: Feature[] }) => { geometries: number[] | number[][] | number[][][] | number[][][][], properties: {Object.<string, string>}, type: string }}
  */
 function justType(gjType, shpType) {
-  return function (gj) {
-    var oftype = gj.features.filter(isType(gjType));
-    return {
-      geometries: shpType === 'POLYLINE' ? [oftype.map(justCoords)] : oftype.map(justCoords),
-      properties: oftype.map(justProps),
-      type: shpType,
-    };
-  };
+	return function (gj) {
+		var oftype = gj.features.filter(isType(gjType));
+		return {
+			geometries: shpType === "POLYLINE" ? [oftype.map(justCoords)] : oftype.map(justCoords),
+			properties: oftype.map(justProps),
+			type: shpType,
+		};
+	};
 }
 
 /**
- * 
+ *
  * @param {Feature} feature The feature to get the coordinates from
  * @returns {number[] | number[][] | number[][][] | number[][][][]}
  */
 function justCoords(feature) {
-  return feature.geometry.coordinates;
+	return feature.geometry.coordinates;
 }
 
 /**
- * 
- * @param {Feature} feature The feature to get the properties from 
+ *
+ * @param {Feature} feature The feature to get the properties from
  * @returns {Object.<string, string>}
  */
 function justProps(feature) {
-  return feature.properties;
+	return feature.properties;
 }
 
 /**
@@ -45,12 +45,12 @@ function justProps(feature) {
  * @returns {(f: Feature) => boolean} a function that returns true if the feature's type is in {@link type}
  */
 function isType(type) {
-  if (Array.isArray(type))
-    return function (f) {
-      return type.includes(f.geometry.type);
-    };
-  else
-    return function (f) {
-      return f.geometry.type === type;
-    };
+	if (Array.isArray(type))
+		return function (f) {
+			return type.includes(f.geometry.type);
+		};
+	else
+		return function (f) {
+			return f.geometry.type === type;
+		};
 }
