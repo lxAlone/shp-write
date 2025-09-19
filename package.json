@@ -1,6 +1,6 @@
 {
   "name": "@longxuan/shp-write",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "write shapefiles from pure javascript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
